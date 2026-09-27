@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA — Shopping Bag</title>
+  <meta name="description" content="Review your selected NOVA pieces, adjust variants, and proceed to checkout.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="page-transition-veil"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span>NOVA</span>
+        <span class="dot"></span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="collections.html" class="nav-link">Collections</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-icon" data-open-search aria-label="Open Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <a href="wishlist.html" class="btn-icon" aria-label="View Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <button class="btn-icon" onclick="openCartDrawer()" aria-label="View Shopping Bag">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="badge-count cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+      <span class="brand-logo">NOVA<span class="dot"></span></span>
+      <button class="btn-icon" id="mobileDrawerClose">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="collections.html" class="mobile-nav-link">Collections</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="journal.html" class="mobile-nav-link">Journal</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+      <a href="wishlist.html" class="mobile-nav-link" style="color: var(--accent);">Wishlist</a>
+    </nav>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- Cart Page Content -->
+  <main style="padding-top: calc(var(--nav-height) + 40px); padding-bottom: 120px;">
+    <div class="container">
+      <div class="meta-row" style="margin-bottom: 16px;">
+        <a href="index.html" class="btn-link" style="font-size: 0.75rem; color: var(--text-muted);">Home</a>
+        <span class="sep">/</span>
+        <span>Shopping Bag</span>
+      </div>
+
+      <h1 style="font-size: clamp(2.4rem, 4vw, 3.6rem); text-transform: uppercase; margin-bottom: 40px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 24px;">
+        SHOPPING BAG
+      </h1>
+
+      <!-- Empty State -->
+      <div id="cartEmptyState" style="display: none; text-align: center; padding: 100px 20px;">
+        <div style="font-size: 3rem; color: var(--text-muted); margin-bottom: 20px; opacity: 0.3;">00</div>
+        <h2 style="font-size: 1.8rem; text-transform: uppercase; margin-bottom: 12px;">Your Bag is Currently Empty</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 32px; max-width: 440px; margin-left: auto; margin-right: auto;">
+          Pieces you add while browsing our atelier catalog will be preserved in your session.
+        </p>
+        <a href="shop.html" class="btn btn-primary">Explore The Archive</a>
+      </div>
+
+      <!-- Filled State -->
+      <div id="cartFilledState" style="display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 60px; align-items: start;">
+        <!-- Left: Table of Items -->
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-subtle); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">
+                <th style="padding-bottom: 16px;">Item Description</th>
+                <th style="padding-bottom: 16px; text-align: center;">Quantity</th>
+                <th style="padding-bottom: 16px; text-align: right;">Total</th>
+                <th style="padding-bottom: 16px; text-align: right;"></th>
+              </tr>
+            </thead>
+            <tbody id="cartPageTableBody">
+              <!-- Rendered via cart.js -->
+            </tbody>
+          </table>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 32px;">
+            <a href="shop.html" class="btn-link">← Continue Exploring</a>
+            <button class="btn btn-secondary btn-sm" onclick="clearCart()">Empty Bag</button>
+          </div>
+        </div>
+
+        <!-- Right: Summary Sidebar -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 32px;">
+          <h3 style="font-size: 1.1rem; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle);">
+            Order Summary
+          </h3>
+
+          <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; font-size: 0.95rem;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Subtotal</span>
+              <span id="cartPageSubtotal" class="font-mono tabular-nums">$0</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Estimated Express Freight</span>
+              <span id="cartPageShipping" class="font-mono tabular-nums">$20</span>
+            </div>
+
+            <div id="cartPageDiscountRow" style="display: none; justify-content: space-between; color: var(--accent);">
+              <span>Promotional Privilege (NOVA10)</span>
+              <span id="cartPageDiscount" class="font-mono tabular-nums">-$0</span>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700;">
+              <span>Total</span>
+              <span id="cartPageTotal" class="font-mono tabular-nums">$0</span>
+            </div>
+          </div>
+
+          <!-- Promo Code Input -->
+          <div style="margin-bottom: 24px; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+            <div style="font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; color: var(--text-muted);">
+              Promotional Invitation Code
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="promoCodeInput" placeholder="Enter NOVA10" style="flex: 1; padding: 10px; font-size: 0.85rem; text-transform: uppercase;">
+              <button class="btn btn-secondary btn-sm" onclick="handlePromoSubmit()">Apply</button>
+            </div>
+          </div>
+
+          <a href="checkout.html" class="btn btn-primary" style="width: 100%; padding: 16px;">
+            Proceed To Checkout
+          </a>
+
+          <div style="margin-top: 20px; font-size: 0.75rem; color: var(--text-muted); text-align: center; line-height: 1.6;">
+            Complimentary international returns within 30 days of arrival. Taxes and duties calculated at destination.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 NOVA Atelier Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function handlePromoSubmit() {
+      const input = document.getElementById('promoCodeInput');
+      if (input) {
+        applyPromoCode(input.value);
+      }
+    }
+  </script>
+</body>
+</html>

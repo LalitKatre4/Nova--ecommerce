@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA — Express Checkout (Template Demo)</title>
+  <meta name="description" content="Secure luxury checkout simulation for NOVA Atelier. Complete order and receive demo confirmation.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="page-transition-veil"></div>
+
+  <!-- Minimal Checkout Header -->
+  <header style="border-bottom: 1px solid var(--border-subtle); padding: 24px 0; background: var(--bg-primary);">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="index.html" class="brand-logo">
+        <span>NOVA</span>
+        <span class="dot"></span>
+      </a>
+
+      <div class="meta-row">
+        <span>END-TO-END ENCRYPTED</span>
+        <span class="sep">/</span>
+        <span style="color: var(--accent);">DEMO ATELIER CHECKOUT</span>
+      </div>
+
+      <a href="cart.html" class="btn-link" style="font-size: 0.8rem;">Return To Bag</a>
+    </div>
+  </header>
+
+  <!-- Checkout Main Form -->
+  <main style="padding: 60px 0 120px;">
+    <div class="container">
+      <div class="checkout-layout">
+        <!-- Left: Multi-step Form -->
+        <div>
+          <!-- Commercial Template Disclaimer Banner -->
+          <div style="background: rgba(200, 169, 126, 0.08); border: 1px solid var(--border-active); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 32px; display: flex; align-items: center; gap: 16px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A97E" stroke-width="2" style="flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <div style="font-size: 0.85rem; line-height: 1.5;">
+              <strong style="color: var(--accent);">COMMERCIAL TEMPLATE DEMO:</strong> This checkout processes demo orders only. No real payment or credit card processing takes place. Fill out the fields with sample data to inspect the order confirmation workflow.
+            </div>
+          </div>
+
+          <form id="checkoutForm">
+            <!-- Step 1: Customer Contact -->
+            <div class="checkout-card">
+              <h2 class="checkout-step-title">
+                <span class="step-num">01</span>
+                <span>Client Identification</span>
+              </h2>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="checkoutEmail">Email Address</label>
+                  <input type="email" id="checkoutEmail" required value="atelier.client@nova-editorial.com" placeholder="client@domain.com">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="checkoutPhone">Telephone Contact</label>
+                  <input type="tel" id="checkoutPhone" required value="+1 (555) 392-8012" placeholder="+1 (555) 000-0000">
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Shipping Destination -->
+            <div class="checkout-card">
+              <h2 class="checkout-step-title">
+                <span class="step-num">02</span>
+                <span>Shipping Address</span>
+              </h2>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input type="text" required value="Julian" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" required value="Vane" placeholder="Last Name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Street Address & Residence</label>
+                <input type="text" required value="482 Mercer Street, Penthouse 4B" placeholder="Street Address">
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label">City</label>
+                  <input type="text" required value="New York" placeholder="City">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Postal / ZIP Code</label>
+                  <input type="text" required value="10013" placeholder="ZIP Code">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Country / Territory</label>
+                <select style="width: 100%;">
+                  <option selected>United States (Domestic)</option>
+                  <option>United Kingdom</option>
+                  <option>Italy (Milan Atelier Hub)</option>
+                  <option>Japan (Tokyo Hub)</option>
+                  <option>France</option>
+                  <option>Germany</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Step 3: Delivery Speed -->
+            <div class="checkout-card">
+              <h2 class="checkout-step-title">
+                <span class="step-num">03</span>
+                <span>Delivery Method</span>
+              </h2>
+
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid var(--border-medium); border-radius: var(--radius-xs); cursor: pointer; background: var(--bg-card);">
+                  <div style="display: flex; align-items: center; gap: 14px;">
+                    <input type="radio" name="shipping_method" value="0" checked style="accent-color: var(--accent);">
+                    <div>
+                      <div style="font-weight: 600; font-size: 0.95rem;">Standard Insured Dispatch</div>
+                      <div style="font-size: 0.75rem; color: var(--text-muted);">Delivered in 4–6 business days</div>
+                    </div>
+                  </div>
+                  <span class="font-mono tabular-nums" style="font-size: 0.9rem;">Free ($250+) / $20</span>
+                </label>
+
+                <label style="display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid var(--border-subtle); border-radius: var(--radius-xs); cursor: pointer; background: var(--bg-card);">
+                  <div style="display: flex; align-items: center; gap: 14px;">
+                    <input type="radio" name="shipping_method" value="25" style="accent-color: var(--accent);">
+                    <div>
+                      <div style="font-weight: 600; font-size: 0.95rem;">Priority Global White-Glove Courier</div>
+                      <div style="font-size: 0.75rem; color: var(--text-muted);">Delivered in 1–2 business days via dedicated courier</div>
+                    </div>
+                  </div>
+                  <span class="font-mono tabular-nums" style="font-size: 0.9rem; color: var(--accent);">+$25.00</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 4: Payment Method (Demo UI) -->
+            <div class="checkout-card">
+              <h2 class="checkout-step-title">
+                <span class="step-num">04</span>
+                <span>Payment Method (Demo Mode)</span>
+              </h2>
+
+              <!-- Payment Tabs -->
+              <div style="display: flex; gap: 10px; margin-bottom: 24px;">
+                <button type="button" class="btn btn-secondary payment-tab-btn active" data-payment-method="card" style="flex: 1; padding: 12px;">Credit Card (Demo)</button>
+                <button type="button" class="btn btn-secondary payment-tab-btn" data-payment-method="apple" style="flex: 1; padding: 12px;">Apple Pay (Demo)</button>
+                <button type="button" class="btn btn-secondary payment-tab-btn" data-payment-method="cod" style="flex: 1; padding: 12px;">Cash on Delivery</button>
+              </div>
+
+              <!-- Card Panel -->
+              <div class="payment-panel" id="panel-card">
+                <div class="form-group">
+                  <label class="form-label">Simulated Card Number</label>
+                  <input type="text" value="•••• •••• •••• 4242" placeholder="4242 4242 4242 4242">
+                </div>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label">Expiry MM / YY</label>
+                    <input type="text" value="12/28" placeholder="MM/YY">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">CVC / CVV</label>
+                    <input type="text" value="888" placeholder="CVC">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Apple Pay Panel -->
+              <div class="payment-panel" id="panel-apple" style="display: none; text-align: center; padding: 24px 0;">
+                <div style="font-size: 2rem; margin-bottom: 8px;">Pay</div>
+                <p style="font-size: 0.85rem;">One-touch biometric authorization simulated on order placement.</p>
+              </div>
+
+              <!-- Cash on Delivery Panel -->
+              <div class="payment-panel" id="panel-cod" style="display: none; padding: 16px 0;">
+                <p style="font-size: 0.9rem; line-height: 1.6;">
+                  Pay upon hand delivery directly to the private courier. Signature and identification required at handover.
+                </p>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="placeOrderBtn" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 0.95rem;">
+              Complete Acquisition & Place Order
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Order Summary Breakdown -->
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 32px; position: sticky; top: 32px;">
+          <h3 style="font-size: 1.1rem; text-transform: uppercase; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border-subtle);">
+            Order Dossier
+          </h3>
+
+          <div id="checkoutItemsList" style="margin-bottom: 24px;">
+            <!-- Populated via checkout.js -->
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.95rem; border-top: 1px solid var(--border-subtle); padding-top: 20px;">
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Subtotal</span>
+              <span id="checkoutSubtotal" class="font-mono tabular-nums">$0</span>
+            </div>
+
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--text-secondary);">Freight Delivery</span>
+              <span id="checkoutShipping" class="font-mono tabular-nums">FREE</span>
+            </div>
+
+            <div style="border-top: 1px solid var(--border-subtle); padding-top: 16px; display: flex; justify-content: space-between; font-size: 1.25rem; font-weight: 700;">
+              <span>Total Amount</span>
+              <span id="checkoutTotal" class="font-mono tabular-nums" style="color: var(--accent);">$0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       ORDER CONFIRMATION MODAL (Success State)
+       ======================================================================== -->
+  <div class="quickview-modal" id="orderSuccessModal" style="background: rgba(10, 10, 12, 0.95); backdrop-filter: blur(24px);">
+    <div style="background: var(--bg-surface); border: 1px solid var(--accent); border-radius: var(--radius-sm); max-width: 620px; width: 100%; padding: 48px; text-align: center; position: relative;">
+      
+      <!-- Checkmark Animation Icon -->
+      <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--accent-subtle); border: 1px solid var(--accent); color: var(--accent); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+
+      <div class="meta-row" style="justify-content: center; margin-bottom: 12px; color: var(--accent);">
+        <span>CONFIRMED ATELIER DISPATCH</span>
+      </div>
+
+      <h2 style="font-size: 2.2rem; text-transform: uppercase; margin-bottom: 16px;">ORDER RECEIVED</h2>
+      
+      <p style="color: var(--text-secondary); margin-bottom: 28px; line-height: 1.6;">
+        Thank you for acquiring from NOVA. Your pieces are currently being allocated, inspected, and prepared for private courier freight.
+      </p>
+
+      <!-- Order Details Card -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xs); padding: 24px; text-align: left; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Order Tracking ID</span>
+          <span id="successOrderNumber" class="font-mono" style="font-weight: 700; color: var(--accent);">#NV-849201</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Dispatch Confirmation To</span>
+          <span id="successEmail" style="font-weight: 500;">client@domain.com</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="color: var(--text-muted);">Estimated Arrival Date</span>
+          <span id="successDeliveryDate" style="font-weight: 500;">Oct 02, 2026</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px; justify-content: center;">
+        <a href="shop.html" class="btn btn-primary" style="padding: 14px 28px;">Return to Archive</a>
+        <button class="btn btn-secondary" onclick="window.print()" style="padding: 14px 24px;">Print Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

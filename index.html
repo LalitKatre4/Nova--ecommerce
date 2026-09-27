@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA — Editorial E-Commerce Template</title>
+  <meta name="description" content="A luxury, editorial e-commerce website template powered by vanilla HTML5, CSS3, JavaScript, GSAP, and ScrollTrigger.">
+  <meta property="og:title" content="NOVA — Editorial E-Commerce Template">
+  <meta property="og:description" content="A luxury, editorial e-commerce website template powered by vanilla HTML5, CSS3, JavaScript, GSAP, and ScrollTrigger.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       PAGE TRANSITION VEIL
+       ======================================================================== -->
+  <div class="page-transition-veil"></div>
+
+  <!-- ========================================================================
+       GLOBAL STICKY HEADER (Top Bar 3-Zone Contract)
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="index.html" class="brand-logo" aria-label="NOVA Homepage">
+        <span>NOVA</span>
+        <span class="dot"></span>
+      </a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="collections.html" class="nav-link">Collections</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Zone 3: Interactive Actions (Search, Wishlist, Bag, Mobile Toggle) -->
+      <div class="nav-actions">
+        <button class="btn-icon" data-open-search aria-label="Open Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <a href="wishlist.html" class="btn-icon" aria-label="View Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <button class="btn-icon" onclick="openCartDrawer()" aria-label="View Shopping Bag">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="badge-count cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       MOBILE DRAWER
+       ======================================================================== -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+      <span class="brand-logo">NOVA<span class="dot"></span></span>
+      <button class="btn-icon" id="mobileDrawerClose" aria-label="Close Mobile Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-links">
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="collections.html" class="mobile-nav-link">Collections</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="journal.html" class="mobile-nav-link">Journal</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+      <a href="wishlist.html" class="mobile-nav-link" style="color: var(--accent);">Wishlist</a>
+    </nav>
+
+    <div class="mobile-drawer-footer">
+      <div class="meta-row">
+        <span>CURRENCY: USD ($)</span>
+        <span class="sep">/</span>
+        <span>ATELIER EDITION</span>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-muted);">© NOVA Atelier. All rights reserved.</p>
+    </div>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- ========================================================================
+       MAIN CONTENT
+       ======================================================================== -->
+  <main>
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-kicker">01 // AUTUMN / WINTER 2026</div>
+          <h1 class="hero-title">
+            <span class="title-line">DESIGNED</span>
+            <span class="title-line">TO MOVE.</span>
+          </h1>
+          <p class="hero-desc">
+            Contemporary essentials crafted for modern living. Engineered with parametric silhouettes, architectural tailoring, and noble materials.
+          </p>
+          <div class="hero-ctas">
+            <a href="shop.html" class="btn btn-primary">Shop Collection</a>
+            <a href="#showcase" class="btn btn-secondary">Explore Design</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <!-- Floating Geometric Rings -->
+          <div class="floating-ring ring-1"></div>
+          <div class="floating-ring ring-2"></div>
+
+          <!-- Hero Floating Spec Chips -->
+          <div class="hero-spec-chip spec-chip-1">
+            <span class="spec-label">CHASSIS WEIGHT</span>
+            <span class="spec-value">340G / CARBON</span>
+          </div>
+
+          <div class="hero-spec-chip spec-chip-2">
+            <span class="spec-label">PROTOTYPE</span>
+            <span class="spec-value">ECLIPSE RUNNER 01</span>
+          </div>
+
+          <!-- Hero Main Product (Interactive Floating) -->
+          <div class="hero-product-wrapper">
+            <img src="/assets/images/eclipse-runner.jpg" alt="NOVA Eclipse Runner" class="hero-product-img">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. MARQUEE / BRAND STATEMENT -->
+    <section class="marquee-section" aria-hidden="true">
+      <div class="marquee-track css-animate">
+        <span class="marquee-item">NEW COLLECTION <span class="sep-dot"></span></span>
+        <span class="marquee-item">DESIGNED FOR EVERYDAY <span class="sep-dot"></span></span>
+        <span class="marquee-item">ARCHITECTURAL TAILORING <span class="sep-dot"></span></span>
+        <span class="marquee-item">PRECISION ATELIER <span class="sep-dot"></span></span>
+        <span class="marquee-item">NEW COLLECTION <span class="sep-dot"></span></span>
+        <span class="marquee-item">DESIGNED FOR EVERYDAY <span class="sep-dot"></span></span>
+        <span class="marquee-item">ARCHITECTURAL TAILORING <span class="sep-dot"></span></span>
+        <span class="marquee-item">PRECISION ATELIER <span class="sep-dot"></span></span>
+      </div>
+    </section>
+
+    <!-- 3. FEATURED COLLECTION -->
+    <section class="section-spacing" id="featured">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-kicker">CURATED RELEASES</div>
+            <h2 class="section-title">FEATURED EDITIONS</h2>
+          </div>
+          <a href="shop.html" class="btn-link">View Full Archive (12) →</a>
+        </div>
+
+        <div class="product-grid" id="featuredGrid">
+          <!-- Populated from products.js in inline script / JS -->
+          <div class="product-card">
+            <div class="card-media">
+              <img src="/assets/images/eclipse-runner.jpg" alt="Eclipse Runner" class="card-img">
+              <span class="card-badge">Bestseller</span>
+              <div class="card-actions-hover">
+                <button class="btn-card-quick" onclick="openQuickView('eclipse-runner')">Quick View</button>
+                <button class="btn-card-wish" data-wishlist-id="eclipse-runner" onclick="toggleWishlist('eclipse-runner')" title="Save to wishlist" aria-label="Save to wishlist">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span>Footwear</span>
+                <span class="card-price tabular-nums">$380</span>
+              </div>
+              <a href="product.html?id=eclipse-runner" class="card-title">Eclipse Runner</a>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%; padding: 10px;" onclick="addToCart('eclipse-runner')">Add To Bag</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="card-media">
+              <img src="/assets/images/atelier-jacket.jpg" alt="Atelier Melton Coat" class="card-img">
+              <span class="card-badge">Craftsmanship</span>
+              <div class="card-actions-hover">
+                <button class="btn-card-quick" onclick="openQuickView('atelier-jacket')">Quick View</button>
+                <button class="btn-card-wish" data-wishlist-id="atelier-jacket" onclick="toggleWishlist('atelier-jacket')" title="Save to wishlist" aria-label="Save to wishlist">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span>Outerwear</span>
+                <span class="card-price tabular-nums">$890</span>
+              </div>
+              <a href="product.html?id=atelier-jacket" class="card-title">Atelier Melton Coat</a>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%; padding: 10px;" onclick="addToCart('atelier-jacket')">Add To Bag</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="card-media">
+              <img src="/assets/images/form-leather-bag.jpg" alt="Form Sculptural Tote" class="card-img">
+              <span class="card-badge">Limited Run</span>
+              <div class="card-actions-hover">
+                <button class="btn-card-quick" onclick="openQuickView('form-leather-bag')">Quick View</button>
+                <button class="btn-card-wish" data-wishlist-id="form-leather-bag" onclick="toggleWishlist('form-leather-bag')" title="Save to wishlist" aria-label="Save to wishlist">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span>Leather Goods</span>
+                <span class="card-price tabular-nums">$640</span>
+              </div>
+              <a href="product.html?id=form-leather-bag" class="card-title">Form Sculptural Tote</a>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%; padding: 10px;" onclick="addToCart('form-leather-bag')">Add To Bag</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="card-media">
+              <img src="/assets/images/axis-chronograph.jpg" alt="Axis Chronograph 41" class="card-img">
+              <span class="card-badge">Signature</span>
+              <div class="card-actions-hover">
+                <button class="btn-card-quick" onclick="openQuickView('axis-chronograph')">Quick View</button>
+                <button class="btn-card-wish" data-wishlist-id="axis-chronograph" onclick="toggleWishlist('axis-chronograph')" title="Save to wishlist" aria-label="Save to wishlist">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="card-meta">
+                <span>Timepieces</span>
+                <span class="card-price tabular-nums">$1,250</span>
+              </div>
+              <a href="product.html?id=axis-chronograph" class="card-title">Axis Chronograph 41</a>
+              <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%; padding: 10px;" onclick="addToCart('axis-chronograph')">Add To Bag</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. IMMERSIVE COLLECTION SECTION -->
+    <section class="section-spacing immersive-section">
+      <div class="container immersive-grid">
+        <div class="immersive-media-frame">
+          <img src="/assets/images/editorial-form-function.jpg" alt="NOVA Atelier Architecture" loading="lazy">
+        </div>
+
+        <div class="immersive-content">
+          <div class="meta-row" style="margin-bottom: 16px;">
+            <span>EDITORIAL PHILOSOPHY</span>
+            <span class="sep">/</span>
+            <span>VOL. IV</span>
+          </div>
+          <h2 class="immersive-quote">FORM MEETS FUNCTION.</h2>
+          <p class="immersive-prose">
+            We reject the transient whims of fast cycles. Every garment, chronometer, and leather silhouette in our repertoire is calibrated to exist at the intersection of technical precision and timeless monolithic beauty.
+          </p>
+          <div style="display: flex; gap: 24px; align-items: center;">
+            <a href="about.html" class="btn btn-primary">Our Atelier</a>
+            <a href="shop.html?category=outerwear" class="btn-link">Explore Outerwear →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. CATEGORY SHOWCASE -->
+    <section class="section-spacing">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-kicker">DISCIPLINES</div>
+            <h2 class="section-title">EXPLORE CATEGORIES</h2>
+          </div>
+          <span class="meta-row">THREE PILLARS</span>
+        </div>
+
+        <div class="category-grid">
+          <a href="shop.html?category=apparel" class="category-card">
+            <img src="/assets/images/cat-men.jpg" alt="Men's Collection" class="category-card-bg" loading="lazy">
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <div class="category-card-kicker">TAILORING & RUNNERS</div>
+              <h3 class="category-card-title">MEN</h3>
+              <span class="btn-link" style="color: var(--text-primary);">Discover Series →</span>
+            </div>
+          </a>
+
+          <a href="shop.html?category=outerwear" class="category-card">
+            <img src="/assets/images/cat-women.jpg" alt="Women's Collection" class="category-card-bg" loading="lazy">
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <div class="category-card-kicker">SILHOUETTES & WOOL</div>
+              <h3 class="category-card-title">WOMEN</h3>
+              <span class="btn-link" style="color: var(--text-primary);">Discover Series →</span>
+            </div>
+          </a>
+
+          <a href="shop.html?category=accessories" class="category-card">
+            <img src="/assets/images/cat-accessories.jpg" alt="Accessories Collection" class="category-card-bg" loading="lazy">
+            <div class="category-card-overlay"></div>
+            <div class="category-card-content">
+              <div class="category-card-kicker">TIMEPIECES & LEATHER</div>
+              <h3 class="category-card-title">ACCESSORIES</h3>
+              <span class="btn-link" style="color: var(--text-primary);">Discover Series →</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FEATURED PRODUCT / DRAMATIC SHOWCASE -->
+    <section class="section-spacing showcase-section" id="showcase">
+      <div class="container">
+        <div class="showcase-header">
+          <div class="section-kicker">HOROLOGY SPOTLIGHT</div>
+          <h2 class="section-title">AXIS CHRONOGRAPH 41</h2>
+          <p style="margin-top: 12px; font-size: 1.05rem;">Machined from a single ingot of Grade 5 Titanium with bespoke automatic caliber NV-01.</p>
+        </div>
+
+        <div class="showcase-center-stage">
+          <div class="showcase-callout callout-1">
+            <div style="font-size: 0.7rem; color: var(--accent); font-weight: 700; letter-spacing: 0.1em;">MATERIALITY</div>
+            <div style="font-size: 0.95rem; font-weight: 600;">Grade 5 Titanium Case</div>
+          </div>
+
+          <div class="showcase-callout callout-2">
+            <div style="font-size: 0.7rem; color: var(--accent); font-weight: 700; letter-spacing: 0.1em;">MECHANISM</div>
+            <div style="font-size: 0.95rem; font-weight: 600;">Caliber NV-01 Automatic</div>
+          </div>
+
+          <img src="/assets/images/axis-chronograph.jpg" alt="Axis Chronograph Centerpiece" class="showcase-product-img" loading="lazy">
+
+          <div class="showcase-callout callout-3">
+            <div style="font-size: 0.7rem; color: var(--accent); font-weight: 700; letter-spacing: 0.1em;">RESERVE</div>
+            <div style="font-size: 0.95rem; font-weight: 600;">68 Hours Autonomy</div>
+          </div>
+
+          <div class="showcase-callout callout-4">
+            <div style="font-size: 0.7rem; color: var(--accent); font-weight: 700; letter-spacing: 0.1em;">DEPTH RATING</div>
+            <div style="font-size: 0.95rem; font-weight: 600;">100M / 10 ATM Water Resistance</div>
+          </div>
+        </div>
+
+        <div style="margin-top: 48px; display: flex; justify-content: center; gap: 20px;">
+          <button class="btn btn-primary" onclick="addToCart('axis-chronograph')">Acquire Piece — $1,250</button>
+          <a href="product.html?id=axis-chronograph" class="btn btn-secondary">Detailed Dossier</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. NEW ARRIVALS (HORIZONTAL PINNED SCROLL) -->
+    <section class="section-spacing horizontal-scroll-container">
+      <div class="container">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <div class="section-header-left">
+            <div class="section-kicker">SPRING ROTATION</div>
+            <h2 class="section-title">NEW ARRIVALS</h2>
+          </div>
+          <button type="button" class="meta-row advance-scroll-btn" id="advanceHorizontalBtn" aria-label="Advance to next product">
+            <span>SCROLL TO ADVANCE</span>
+            <span class="advance-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div class="horizontal-track-wrapper">
+          <div class="horizontal-track">
+            <!-- Product 1 -->
+            <div class="horizontal-item">
+              <div class="product-card">
+                <div class="card-media">
+                  <img src="/assets/images/monolith-sunglasses.jpg" alt="Monolith Acetate Eyewear" class="card-img" loading="lazy">
+                  <span class="card-badge">New</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-meta">
+                    <span>Accessories</span>
+                    <span class="card-price tabular-nums">$320</span>
+                  </div>
+                  <a href="product.html?id=monolith-sunglasses" class="card-title">Monolith Acetate Eyewear</a>
+                  <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%;" onclick="addToCart('monolith-sunglasses')">Add To Bag</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="horizontal-item">
+              <div class="product-card">
+                <div class="card-media">
+                  <img src="/assets/images/void-cashmere.jpg" alt="Void Cashmere Knit" class="card-img" loading="lazy">
+                  <span class="card-badge">Core Essential</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-meta">
+                    <span>Apparel</span>
+                    <span class="card-price tabular-nums">$460</span>
+                  </div>
+                  <a href="product.html?id=void-cashmere" class="card-title">Void Cashmere Knit</a>
+                  <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%;" onclick="addToCart('void-cashmere')">Add To Bag</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="horizontal-item">
+              <div class="product-card">
+                <div class="card-media">
+                  <img src="/assets/images/solstice-fragrance.jpg" alt="Solstice Extrait de Parfum" class="card-img" loading="lazy">
+                  <span class="card-badge">Artisanal</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-meta">
+                    <span>Fragrance</span>
+                    <span class="card-price tabular-nums">$260</span>
+                  </div>
+                  <a href="product.html?id=solstice-fragrance" class="card-title">Solstice Extrait de Parfum</a>
+                  <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%;" onclick="addToCart('solstice-fragrance')">Add To Bag</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="horizontal-item">
+              <div class="product-card">
+                <div class="card-media">
+                  <img src="/assets/images/vector-crossbody.jpg" alt="Vector Technical Crossbody" class="card-img" loading="lazy">
+                  <span class="card-badge">Waterproof</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-meta">
+                    <span>Accessories</span>
+                    <span class="card-price tabular-nums">$290</span>
+                  </div>
+                  <a href="product.html?id=vector-crossbody" class="card-title">Vector Technical Crossbody</a>
+                  <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%;" onclick="addToCart('vector-crossbody')">Add To Bag</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="horizontal-item">
+              <div class="product-card">
+                <div class="card-media">
+                  <img src="/assets/images/terra-boot.jpg" alt="Terra Commando Chelsea" class="card-img" loading="lazy">
+                  <span class="card-badge">Winter Core</span>
+                </div>
+                <div class="card-body">
+                  <div class="card-meta">
+                    <span>Footwear</span>
+                    <span class="card-price tabular-nums">$540</span>
+                  </div>
+                  <a href="product.html?id=terra-boot" class="card-title">Terra Commando Chelsea</a>
+                  <button class="btn btn-secondary btn-sm" style="margin-top: 10px; width: 100%;" onclick="addToCart('terra-boot')">Add To Bag</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. BRAND STORY & MANIFESTO -->
+    <section class="section-spacing brand-story-section">
+      <div class="container story-grid">
+        <div>
+          <div class="section-kicker">ATELIER VALUES</div>
+          <h2 class="story-manifesto">
+            WE BELIEVE EVERY OBJECT SHOULD HAVE A PURPOSE.
+          </h2>
+          <p style="font-size: 1.05rem; line-height: 1.7; margin-bottom: 24px;">
+            In an era of hyper-accelerated obsolescence, NOVA was founded on an exacting counter-principle: design that endures physically, aesthetically, and functionally.
+          </p>
+          <p style="font-size: 1rem; line-height: 1.7;">
+            We collaborate exclusively with master generational workshops across Northern Italy, Switzerland, and Northamptonshire. Every stitch is placed with intention, every edge burnished by hand.
+          </p>
+
+          <div class="story-stat-row">
+            <div class="stat-item">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Traceable Provenance</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">08</div>
+              <div class="stat-label">Generational Ateliers</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">14+</div>
+              <div class="stat-label">Design Honors</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-image-wrap" style="position: relative; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle);">
+          <img src="/assets/images/zenith-blazer.jpg" alt="NOVA Tailoring Atelier" style="width: 100%; aspect-ratio: 4/5; object-fit: cover;" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. NEWSLETTER / CTA -->
+    <section class="section-spacing newsletter-section">
+      <div class="container">
+        <div class="newsletter-box">
+          <div class="section-kicker">PRIVATE DISPATCH</div>
+          <h2 class="newsletter-title">STAY IN MOTION.</h2>
+          <p class="newsletter-desc">
+            Receive private allocations, seasonal lookbooks, and invitation-only previews directly to your inbox.
+          </p>
+          <form class="newsletter-form" id="newsletterForm">
+            <input type="email" placeholder="Enter your email address" required aria-label="Email Address">
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+          <div class="newsletter-feedback" id="newsletterFeedback"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       GLOBAL FOOTER
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 16px;">
+            <span>NOVA</span>
+            <span class="dot"></span>
+          </a>
+          <p class="footer-tagline">
+            Contemporary essentials crafted for modern living. An editorial commercial template built with pure HTML5, CSS3, and GSAP.
+          </p>
+          <div class="meta-row" style="color: var(--accent);">
+            <span>FLAGSHIP: MILAN</span>
+            <span class="sep">/</span>
+            <span>TOKYO</span>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Shop</h4>
+          <div class="footer-nav">
+            <a href="shop.html" class="footer-link">All Archive</a>
+            <a href="collections.html" class="footer-link">Curated Collections</a>
+            <a href="shop.html?category=footwear" class="footer-link">Footwear</a>
+            <a href="shop.html?category=outerwear" class="footer-link">Outerwear</a>
+            <a href="shop.html?category=leather" class="footer-link">Leather Goods</a>
+            <a href="shop.html?category=timepieces" class="footer-link">Timepieces</a>
+            <a href="shop.html?category=accessories" class="footer-link">Accessories</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Atelier</h4>
+          <div class="footer-nav">
+            <a href="about.html" class="footer-link">Our Philosophy</a>
+            <a href="about.html#craftsmanship" class="footer-link">Craftsmanship</a>
+            <a href="about.html#sustainability" class="footer-link">Traceability</a>
+            <a href="journal.html" class="footer-link">The Journal Dispatches</a>
+            <a href="contact.html" class="footer-link">Concierge</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Client Care</h4>
+          <div class="footer-nav">
+            <a href="contact.html#shipping" class="footer-link">Shipping & Returns</a>
+            <a href="contact.html#sizing" class="footer-link">Size Guide</a>
+            <a href="cart.html" class="footer-link">Shopping Bag</a>
+            <a href="wishlist.html" class="footer-link">Saved Items</a>
+            <a href="checkout.html" class="footer-link">Express Checkout</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Connect</h4>
+          <div class="footer-nav">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-link">Instagram</a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="footer-link">Pinterest</a>
+            <a href="https://x.com" target="_blank" rel="noopener" class="footer-link">X (Twitter)</a>
+            <a href="https://spotify.com" target="_blank" rel="noopener" class="footer-link">Soundtrack</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 NOVA Atelier Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Cookie Preferences</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODALS & OVERLAYS: Cart Drawer, Search, Quick View, Toast Container
+       ======================================================================== -->
+
+  <!-- Cart Flyout Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart Drawer">
+    <div class="cart-drawer-header">
+      <span class="cart-drawer-title">Shopping Bag</span>
+      <button class="btn-icon" onclick="closeCartDrawer()" aria-label="Close Bag">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="cart-drawer-items" id="cartDrawerItems">
+      <!-- Populated dynamically by cart.js -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-line">
+        <span>Estimated Subtotal</span>
+        <span class="cart-summary-total tabular-nums" id="cartDrawerSubtotal">$0</span>
+      </div>
+      <div style="font-size: 0.75rem; color: var(--text-muted);">
+        Complimentary express delivery on orders exceeding $250.
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <a href="cart.html" class="btn btn-secondary" style="flex: 1; padding: 14px;" onclick="closeCartDrawer()">View Bag</a>
+        <a href="checkout.html" class="btn btn-primary" style="flex: 1; padding: 14px;" onclick="closeCartDrawer()">Checkout</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Search Modal Overlay -->
+  <div class="search-modal" id="searchModal" aria-modal="true" role="dialog">
+    <div style="display: flex; justify-content: flex-end;">
+      <button class="btn-icon" id="closeSearchModal" aria-label="Close Search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="search-modal-container">
+      <div class="search-input-wrapper">
+        <input type="text" id="globalSearchInput" class="search-input" placeholder="Search pieces, categories, materials..." autocomplete="off">
+      </div>
+
+      <div class="meta-row">
+        <span>POPULAR:</span>
+        <a href="shop.html?category=footwear" class="btn-link" style="font-size: 0.8rem;">Runners</a>
+        <span class="sep">/</span>
+        <a href="shop.html?category=outerwear" class="btn-link" style="font-size: 0.8rem;">Melton Coats</a>
+        <span class="sep">/</span>
+        <a href="shop.html?category=timepieces" class="btn-link" style="font-size: 0.8rem;">Titanium 41</a>
+      </div>
+
+      <div id="searchEmptyNote" style="display: none; color: var(--text-muted); font-size: 0.95rem;"></div>
+
+      <div class="search-results-grid" id="searchResultsGrid">
+        <!-- Live search results inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="quickview-modal" id="quickViewModal" aria-modal="true" role="dialog">
+    <div class="quickview-box">
+      <button class="btn-icon quickview-close" id="closeQuickView" aria-label="Close Quick View">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="quickViewContent" style="display: contents;">
+        <!-- Dynamic quickview content populated via main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container"></div>
+
+  <!-- GSAP & ScrollTrigger from Cloudflare CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Application Modules -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

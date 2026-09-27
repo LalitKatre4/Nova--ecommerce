@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA — Client Concierge & Flagships</title>
+  <meta name="description" content="Contact the NOVA client concierge, schedule private appointments, or view atelier locations worldwide.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="page-transition-veil"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <span>NOVA</span>
+        <span class="dot"></span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="collections.html" class="nav-link">Collections</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-icon" data-open-search aria-label="Open Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <a href="wishlist.html" class="btn-icon" aria-label="View Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <button class="btn-icon" onclick="openCartDrawer()" aria-label="View Shopping Bag">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="badge-count cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+      <span class="brand-logo">NOVA<span class="dot"></span></span>
+      <button class="btn-icon" id="mobileDrawerClose">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="collections.html" class="mobile-nav-link">Collections</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="journal.html" class="mobile-nav-link">Journal</a>
+      <a href="contact.html" class="mobile-nav-link active">Contact</a>
+      <a href="wishlist.html" class="mobile-nav-link" style="color: var(--accent);">Wishlist</a>
+    </nav>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- Contact Main -->
+  <main class="contact-main">
+    <div class="container">
+      <div class="meta-row" style="margin-bottom: 20px;">
+        <a href="index.html" class="btn-link" style="font-size: 0.75rem; color: var(--text-muted);">Home</a>
+        <span class="sep">/</span>
+        <span>Client Concierge</span>
+      </div>
+
+      <div class="contact-hero">
+        <h1 class="contact-hero-title">
+          GLOBAL CONCIERGE & APPOINTMENTS
+        </h1>
+        <p class="contact-hero-desc">
+          Our client advisory team operates across Zurich, Milan, and New York to assist with custom sizing, international orders, and horology allocations.
+        </p>
+      </div>
+
+      <div class="contact-layout">
+        <!-- Inquiry Form -->
+        <div class="contact-form-card">
+          <h2 style="font-size: 1.3rem; text-transform: uppercase; margin-bottom: 24px;">Send Private Transmission</h2>
+          
+          <form id="contactForm" onsubmit="event.preventDefault(); showToast('Your inquiry has been received. An advisor will respond within 4 hours.', 'success'); this.reset();">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" required placeholder="Elena Rostova">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" required placeholder="client@domain.com">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Subject of Inquiry</label>
+              <select style="width: 100%;">
+                <option>Private Appointment Booking</option>
+                <option>Sizing & Bespoke Tailoring Consultation</option>
+                <option>Horology Allocation & Caliber NV-01</option>
+                <option>Global Dispatch & Customs</option>
+                <option>Press & Architectural Inquiries</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message Details</label>
+              <textarea rows="5" required placeholder="Please outline your specifications or appointment preference..." style="resize: vertical;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 16px;">
+              Transmit Inquiry
+            </button>
+          </form>
+        </div>
+
+        <!-- Global Flagships -->
+        <div>
+          <h2 style="font-size: 1.3rem; text-transform: uppercase; margin-bottom: 24px;">Flagship Studios</h2>
+          <div class="flagship-list">
+            <div class="flagship-card">
+              <div class="meta-row" style="color: var(--accent); margin-bottom: 8px;">MILAN ATELIER</div>
+              <div style="font-weight: 600; font-size: 1.1rem; margin-bottom: 4px;">Via Montenapoleone 18</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">20121 Milano, Italy</div>
+              <div class="font-mono flagship-contact-info">T: +39 02 8901 4400 · appointment@nova-atelier.it</div>
+            </div>
+
+            <div class="flagship-card">
+              <div class="meta-row" style="color: var(--accent); margin-bottom: 8px;">TOKYO STUDIO</div>
+              <div style="font-weight: 600; font-size: 1.1rem; margin-bottom: 4px;">5-7-22 Minami-Aoyama</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">Minato-ku, Tokyo 107-0062, Japan</div>
+              <div class="font-mono flagship-contact-info">T: +81 3 5410 9980 · tokyo@nova-atelier.jp</div>
+            </div>
+
+            <div class="flagship-card">
+              <div class="meta-row" style="color: var(--accent); margin-bottom: 8px;">NEW YORK ARCHIVE</div>
+              <div style="font-weight: 600; font-size: 1.1rem; margin-bottom: 4px;">482 Mercer Street, SoHo</div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">New York, NY 10013, USA</div>
+              <div class="font-mono flagship-contact-info">T: +1 (212) 640-9200 · nyc@nova-atelier.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Accordions -->
+      <section class="contact-faq-section">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-kicker">COMMONLY ADDRESSED</div>
+            <h2 class="section-title">CLIENT ASSISTANCE FAQ</h2>
+          </div>
+        </div>
+
+        <div class="contact-faq-list">
+          <div class="accordion-item open">
+            <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>How are international duties and VAT handled?</span>
+              <span class="font-mono">+</span>
+            </button>
+            <div class="accordion-content">
+              All NOVA orders are shipped DDP (Delivered Duty Paid). All relevant local import duties, tariffs, and customs clearances are prepaid in full at checkout with zero surcharges upon arrival.
+            </div>
+          </div>
+
+          <div class="accordion-item" id="sizing">
+            <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>Footwear & Tailoring Sizing Reference</span>
+              <span class="font-mono">+</span>
+            </button>
+            <div class="accordion-content">
+              The Eclipse Runner fits true to European standard athletic measurements. If between sizes, choose the larger. The Atelier Melton Coat is structured with a natural relaxed drape designed to accommodate fine knitwear beneath.
+            </div>
+          </div>
+
+          <div class="accordion-item" id="shipping">
+            <button class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span>Dispatch Protocols & Packaging Standards</span>
+              <span class="font-mono">+</span>
+            </button>
+            <div class="accordion-content">
+              Pieces are delivered in certified FSC recyclable rigid presentation boxes lined with acid-free Japanese mulberry tissue. Shipments are fully insured against transit loss or cosmetic compromise.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <div>© 2026 NOVA Atelier Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <span class="cart-drawer-title">Shopping Bag</span>
+      <button class="btn-icon" onclick="closeCartDrawer()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+    </div>
+    <div class="cart-drawer-items" id="cartDrawerItems"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-line">
+        <span>Estimated Subtotal</span>
+        <span class="cart-summary-total tabular-nums" id="cartDrawerSubtotal">$0</span>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <a href="cart.html" class="btn btn-secondary" style="flex: 1;" onclick="closeCartDrawer()">View Bag</a>
+        <a href="checkout.html" class="btn btn-primary" style="flex: 1;" onclick="closeCartDrawer()">Checkout</a>
+      </div>
+    </div>
+  </aside>
+
+  <div class="search-modal" id="searchModal">
+    <div style="display: flex; justify-content: flex-end;">
+      <button class="btn-icon" id="closeSearchModal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+    </div>
+    <div class="search-modal-container">
+      <input type="text" id="globalSearchInput" class="search-input" placeholder="Search pieces, categories, materials...">
+      <div class="search-results-grid" id="searchResultsGrid"></div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="quickview-modal" id="quickViewModal" aria-modal="true" role="dialog" aria-label="Quick View">
+    <div class="quickview-box">
+      <button class="btn-icon quickview-close" id="closeQuickView" aria-label="Close Quick View">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="quickViewContent" style="display: contents;">
+        <!-- Dynamic quickview content populated via main.js -->
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

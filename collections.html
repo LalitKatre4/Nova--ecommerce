@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOVA — Curated Collections & Editions</title>
+  <meta name="description" content="Explore NOVA's curated collections: Autumn / Winter 2026, Permanent Essentials, Footwear Archive, Outerwear, Leather Goods, and Horology.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+  <div class="page-transition-veil"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo" aria-label="NOVA Homepage">
+        <span>NOVA</span>
+        <span class="dot"></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="collections.html" class="nav-link active">Collections</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-icon" data-open-search aria-label="Open Search">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+
+        <a href="wishlist.html" class="btn-icon" aria-label="View Wishlist">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <span class="badge-count wishlist-count-badge" style="display: none;">0</span>
+        </a>
+
+        <button class="btn-icon" onclick="openCartDrawer()" aria-label="View Shopping Bag">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="badge-count cart-count-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="mobile-toggle" aria-label="Toggle Mobile Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+      <span class="brand-logo">NOVA<span class="dot"></span></span>
+      <button class="btn-icon" id="mobileDrawerClose" aria-label="Close Mobile Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="shop.html" class="mobile-nav-link">Shop</a>
+      <a href="collections.html" class="mobile-nav-link active">Collections</a>
+      <a href="about.html" class="mobile-nav-link">About</a>
+      <a href="journal.html" class="mobile-nav-link">Journal</a>
+      <a href="contact.html" class="mobile-nav-link">Contact</a>
+      <a href="wishlist.html" class="mobile-nav-link" style="color: var(--accent);">Wishlist</a>
+    </nav>
+    <div class="mobile-drawer-footer">
+      <div class="meta-row">
+        <span>CURRENCY: USD ($)</span>
+        <span class="sep">/</span>
+        <span>ATELIER EDITION</span>
+      </div>
+      <p style="font-size: 0.8rem; color: var(--text-muted);">© NOVA Atelier. All rights reserved.</p>
+    </div>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- Main Collections Content -->
+  <main style="padding-top: calc(var(--nav-height) + 30px); padding-bottom: 120px;">
+    <div class="container">
+
+      <!-- Breadcrumbs -->
+      <div class="meta-row" style="margin-bottom: 20px;">
+        <a href="index.html" class="btn-link" style="font-size: 0.75rem; color: var(--text-muted);">Home</a>
+        <span class="sep">/</span>
+        <span>Curated Collections</span>
+      </div>
+
+      <!-- Hero Header Section -->
+      <section class="collections-hero-section">
+        <div class="collections-hero-content">
+          <div class="section-kicker">SEASONAL & ARCHIVAL COMPILATIONS</div>
+          <h1 class="font-display" style="font-size: clamp(2.8rem, 5.5vw, 4.8rem); line-height: 1.05; text-transform: uppercase; margin-bottom: 20px;">
+            CURATED EDITIONS
+          </h1>
+          <p style="font-size: 1.15rem; max-width: 680px; line-height: 1.6; color: var(--text-secondary); margin-bottom: 32px;">
+            Six distinct design disciplines. From dense double-face virgin wool trenches and parametric transit runners to Grade 5 titanium timepieces and vegetable-tanned Tuscan leather.
+          </p>
+
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <a href="#autumn-winter-2026" class="btn btn-primary">Explore AW26 Campaign</a>
+            <a href="shop.html" class="btn btn-secondary">View Complete Archive (12)</a>
+          </div>
+        </div>
+
+        <!-- Parallax Main Hero Frame -->
+        <div class="collections-main-hero">
+          <img src="/assets/images/collections-hero.jpg" alt="NOVA Collections Campaign" class="collections-hero-img">
+          <div class="collections-hero-overlay"></div>
+          <div class="collections-hero-caption">
+            <div class="meta-row" style="color: #fff; margin-bottom: 4px;">
+              <span>AUTUMN / WINTER 2026</span>
+              <span class="sep">·</span>
+              <span>METROPOLITAN TRANSIT</span>
+            </div>
+            <div style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.7);">Photographed at the brutalist pavilion in Turin</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky Quick-Jump Navigation Bar -->
+      <div class="collection-filter-bar">
+        <span class="filter-bar-label">Jump to Collection:</span>
+        <div class="collection-tab-scroller">
+          <button class="collection-tab-btn active" data-collection="all">All Disciplines</button>
+          <button class="collection-tab-btn" data-collection="autumn-winter-2026">Autumn / Winter 2026</button>
+          <button class="collection-tab-btn" data-collection="essentials">Permanent Essentials</button>
+          <button class="collection-tab-btn" data-collection="footwear">Footwear Archive</button>
+          <button class="collection-tab-btn" data-collection="outerwear">Outerwear & Tailoring</button>
+          <button class="collection-tab-btn" data-collection="leather-goods">Leather Goods</button>
+          <button class="collection-tab-btn" data-collection="timepieces">Horology & Objects</button>
+        </div>
+      </div>
+
+      <!-- Collections Container (Dynamically rendered with realistic photography & products) -->
+      <div id="collectionsListContainer" class="collections-list">
+        <!-- Rendered by js/collections.js -->
+      </div>
+
+      <!-- Atelier Craftsmanship Banner -->
+      <section class="atelier-callout-card">
+        <div class="atelier-callout-grid">
+          <div>
+            <div class="section-kicker">HERITAGE ATELIER FABRICATION</div>
+            <h2 class="font-display" style="font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 16px;">
+              ENGINEERED WITHOUT OBSOLESCENCE
+            </h2>
+            <p style="line-height: 1.6; color: var(--text-secondary); margin-bottom: 24px;">
+              Every edition is manufactured in strictly limited runs of 50 to 200 units across regional specialist mills in Civitanova Marche, Biella, Como, and Geneva. When an edition sells out, patterns enter our archive vault.
+            </p>
+            <div style="display: flex; gap: 16px;">
+              <a href="about.html" class="btn btn-secondary">Our Atelier Standards</a>
+              <a href="journal.html" class="btn-link">Read Dispatches →</a>
+            </div>
+          </div>
+          <div style="position: relative; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border-subtle);">
+            <img src="/assets/images/editorial-form-function.jpg" alt="NOVA Atelier Craftsmanship" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-col-brand">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 16px;">
+            <span>NOVA</span>
+            <span class="dot"></span>
+          </a>
+          <p class="footer-brand-bio">
+            Archival luxury apparel, technical footwear, and precision mechanical chronographs. Monolithic design principles engineered for metropolitan life.
+          </p>
+          <div class="meta-row" style="margin-top: 20px;">
+            <span>CIVITANOVA</span>
+            <span class="sep">·</span>
+            <span>BIELLA</span>
+            <span class="sep">·</span>
+            <span>GENEVA</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">Collections</div>
+          <ul class="footer-links">
+            <li><a href="collections.html#autumn-winter-2026" class="footer-link">Autumn / Winter 2026</a></li>
+            <li><a href="collections.html#essentials" class="footer-link">Permanent Essentials</a></li>
+            <li><a href="collections.html#footwear" class="footer-link">Footwear Archive</a></li>
+            <li><a href="collections.html#outerwear" class="footer-link">Outerwear & Tailoring</a></li>
+            <li><a href="collections.html#leather-goods" class="footer-link">Leather Goods</a></li>
+            <li><a href="collections.html#timepieces" class="footer-link">Horology & Objects</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="shop.html" class="footer-link">Shop All Archive</a></li>
+            <li><a href="collections.html" class="footer-link">Curated Collections</a></li>
+            <li><a href="about.html" class="footer-link">Atelier & Philosophy</a></li>
+            <li><a href="journal.html" class="footer-link">The Journal Dispatches</a></li>
+            <li><a href="contact.html" class="footer-link">Client Concierge</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-title">Client Services</div>
+          <ul class="footer-links">
+            <li><a href="contact.html#concierge" class="footer-link">Bespoke Fitting</a></li>
+            <li><a href="contact.html#shipping" class="footer-link">Worldwide Insured Courier</a></li>
+            <li><a href="contact.html#repairs" class="footer-link">Lifetime Archive Repairs</a></li>
+            <li><a href="contact.html#faq" class="footer-link">FAQ & Authenticity</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 NOVA Atelier Inc. All rights reserved.</div>
+        <div class="footer-legal-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Provenance Verification</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Over Shopping Bag Drawer -->
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Bag">
+    <div class="cart-drawer-header">
+      <span class="cart-drawer-title">Shopping Bag</span>
+      <button class="btn-icon" onclick="closeCartDrawer()" aria-label="Close Shopping Bag">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="cart-drawer-items" id="cartDrawerItems"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-line">
+        <span>Estimated Subtotal</span>
+        <span class="cart-summary-total tabular-nums" id="cartDrawerSubtotal">$0</span>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <a href="cart.html" class="btn btn-secondary" style="flex: 1;" onclick="closeCartDrawer()">View Bag</a>
+        <a href="checkout.html" class="btn btn-primary" style="flex: 1;" onclick="closeCartDrawer()">Checkout</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Site Search">
+    <div style="display: flex; justify-content: flex-end;">
+      <button class="btn-icon" id="closeSearchModal" aria-label="Close Search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="search-modal-container">
+      <input type="text" id="globalSearchInput" class="search-input" placeholder="Search pieces, categories, materials...">
+      <div id="searchEmptyNote" style="display: none; padding: 20px 0; color: var(--text-secondary);"></div>
+      <div class="search-results-grid" id="searchResultsGrid"></div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="quickview-modal" id="quickViewModal" aria-modal="true" role="dialog" aria-label="Quick View">
+    <div class="quickview-box">
+      <button class="btn-icon quickview-close" id="closeQuickView" aria-label="Close Quick View">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div id="quickViewContent" style="display: contents;">
+        <!-- Dynamic quickview content populated via main.js -->
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/wishlist.js"></script>
+  <script src="js/collections.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
